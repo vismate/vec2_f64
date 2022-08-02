@@ -9,10 +9,12 @@ pub struct Vec2 {
 }
 
 impl Vec2 {
+    #[inline]
     pub const fn new(x: f64, y: f64) -> Self {
         Self { x, y }
     }
 
+    #[inline]
     pub fn from_angle(angle: f64) -> Self {
         Self {
             x: angle.cos(),
@@ -20,42 +22,52 @@ impl Vec2 {
         }
     }
 
+    #[inline]
     pub fn from_angle_deg(angle: f64) -> Self {
         Self::from_angle(angle.to_radians())
     }
 
+    #[inline]
     pub const fn null() -> Self {
         Self { x: 0.0, y: 0.0 }
     }
 
+    #[inline]
     pub fn len(self) -> f64 {
         self.len_sqr().sqrt()
     }
 
+    #[inline]
     pub fn len_sqr(self) -> f64 {
         self.x * self.x + self.y * self.y
     }
 
+    #[inline]
     pub fn dot(self, other: Self) -> f64 {
         self.x * other.x + self.y * other.y
     }
 
+    #[inline]
     pub fn dist(self, other: Self) -> f64 {
         self.dist_sqr(other).sqrt()
     }
 
+    #[inline]
     pub fn dist_sqr(self, other: Self) -> f64 {
         (self.x - other.x) * (self.x - other.x) + (self.y - other.y) * (self.y - other.y)
     }
 
+    #[inline]
     pub fn angle(self, other: Self) -> f64 {
         f64::atan2(other.y, other.x) - f64::atan2(self.y, self.x)
     }
 
+    #[inline]
     pub fn angle_deg(self, other: Self) -> f64 {
         self.angle(other).to_degrees()
     }
 
+    #[inline]
     pub fn normalize(self) -> Self {
         let len = self.len();
 
@@ -66,6 +78,7 @@ impl Vec2 {
         }
     }
 
+    #[inline]
     pub fn lerp(self, other: Self, factor: f64) -> Self {
         Self {
             x: self.x + factor * (other.x - self.x),
@@ -73,6 +86,7 @@ impl Vec2 {
         }
     }
 
+    #[inline]
     pub fn reflect(self, normal: Self) -> Self {
         let dot = self.dot(normal);
 
@@ -82,6 +96,7 @@ impl Vec2 {
         }
     }
 
+    #[inline]
     pub fn rotate(self, angle: f64) -> Self {
         let (sin, cos) = angle.sin_cos();
 
@@ -91,10 +106,12 @@ impl Vec2 {
         }
     }
 
+    #[inline]
     pub fn rotate_deg(self, angle: f64) -> Self {
         self.rotate(angle.to_radians())
     }
 
+    #[inline]
     pub fn recip(self) -> Self {
         Self {
             x: self.x.recip(),
@@ -102,6 +119,7 @@ impl Vec2 {
         }
     }
 
+    #[inline]
     pub fn abs(self) -> Self {
         Self {
             x: self.x.abs(),
@@ -109,6 +127,7 @@ impl Vec2 {
         }
     }
 
+    #[inline]
     pub fn abs_diff(self, other: Self) -> Self {
         Self {
             x: (self.x - other.x).abs(),
@@ -116,6 +135,7 @@ impl Vec2 {
         }
     }
 
+    #[inline]
     pub fn ceil(self) -> Self {
         Self {
             x: self.x.ceil(),
@@ -123,6 +143,7 @@ impl Vec2 {
         }
     }
 
+    #[inline]
     pub fn floor(self) -> Self {
         Self {
             x: self.x.floor(),
@@ -130,6 +151,7 @@ impl Vec2 {
         }
     }
 
+    #[inline]
     pub fn trunc(self) -> Self {
         Self {
             x: self.x.trunc(),
@@ -137,6 +159,7 @@ impl Vec2 {
         }
     }
 
+    #[inline]
     pub fn clamp(self, min: Self, max: Self) -> Self {
         Self {
             x: f64::min(max.x, f64::max(min.x, self.x)),
@@ -144,6 +167,7 @@ impl Vec2 {
         }
     }
 
+    #[inline]
     pub fn clamp_len(self, min: f64, max: f64) -> Self {
         let len_sqr = self.len_sqr();
 
@@ -162,6 +186,7 @@ impl Vec2 {
         }
     }
 
+    #[inline]
     pub fn normal(self) -> Self {
         let n = self.normalize();
         Vec2::new(n.y, -n.x)
@@ -169,6 +194,7 @@ impl Vec2 {
 }
 
 impl Default for Vec2 {
+    #[inline]
     fn default() -> Self {
         Self::null()
     }
